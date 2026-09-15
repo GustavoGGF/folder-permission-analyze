@@ -99,29 +99,6 @@ Os testes podem ser executados no Windows com:
 python -m unittest discover -s tests -v
 ```
 
-## Publicar no GitHub
-
-Para publicar este projeto em um repositório público:
-
-1. Crie um repositório vazio no GitHub, sem adicionar outro README.
-2. Na pasta do projeto, configure o usuário do Git, se necessário.
-3. Execute os comandos abaixo, substituindo a URL pelo seu repositório:
-
-```bat
-git init
-git add .
-git commit -m "Publica aplicativo de análise de permissões"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-git push -u origin main
-```
-
-Antes de tornar o repositório público, verifique se ele não contém senhas,
-tokens, dados reais de usuários, caminhos internos ou planilhas geradas com
-informações confidenciais. Arquivos `.xlsx`, pastas de build e ambientes
-virtuais já estão configurados no `.gitignore` para não serem enviados por
-engano.
-
 ## Limitações
 
 - funciona somente no Windows;
