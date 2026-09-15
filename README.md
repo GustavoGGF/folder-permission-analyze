@@ -1,31 +1,34 @@
 # Listar grupos e permissões
 
-Aplicativo para Windows que analisa as permissões de uma pasta local ou de um
-compartilhamento de rede SMB e gera uma planilha Excel com os grupos, usuários
-e permissões encontrados.
+Aplicativo executável para Windows que analisa as permissões de uma pasta local
+ou de um compartilhamento de rede SMB e gera uma planilha Excel com os grupos,
+usuários e permissões encontrados.
 
 O programa lê a ACL/DACL da pasta, identifica os grupos que possuem regras de
 acesso e consulta os membros desses grupos no Windows local ou no Active
 Directory. O relatório é salvo no formato `.xlsx`.
 
-## Requisitos
+## Requisitos para usar o programa
 
 - Windows 10 ou superior;
-- Python 3.10 ou superior, caso o programa seja executado pelo código-fonte;
 - acesso à pasta que será analisada;
 - conexão com o domínio/Active Directory, quando os grupos forem do domínio.
 
-O projeto usa APIs de segurança do Windows (`pywin32`) e, portanto, não é
-compatível com Linux ou macOS.
+Não é necessário instalar Python, bibliotecas ou o Microsoft Excel para
+executar o arquivo `.exe`. O projeto funciona somente no Windows porque usa as
+APIs de segurança do sistema.
 
-## Usar o executável
+## Como usar
 
-Se você recebeu `ListarGruposPermissao.exe`:
+1. Baixe ou copie `ListarGruposPermissao.exe` para o computador Windows.
+2. Execute o arquivo. Não é necessário abrir como administrador se sua conta já
+   tiver acesso à pasta e aos grupos.
+3. Clique em **Procurar...** e escolha a pasta local ou de rede.
+4. Clique em **Gerar planilha**.
+5. Abra o arquivo `grupos_permissoes.xlsx` criado dentro da pasta analisada.
 
-1. Execute o arquivo no Windows.
-2. Clique em **Procurar...** e escolha a pasta local ou de rede.
-3. Clique em **Gerar planilha**.
-4. Abra o arquivo `grupos_permissoes.xlsx` criado dentro da pasta analisada.
+O executável pode ser usado sem Python instalado. A conta do Windows precisa
+ter permissão para ler a pasta analisada e consultar os grupos.
 
 Para uma pasta de rede, informe ou selecione um caminho semelhante a:
 
@@ -40,13 +43,13 @@ O relatório contém:
 - mensagens de erro de consulta de membros, quando o Windows não conseguir
   consultar algum grupo.
 
-O executável pode precisar ser iniciado por uma conta que tenha permissão para
-ler a pasta e consultar os grupos. Não é necessário executar como administrador
-se a conta já tiver os acessos necessários.
+## Para desenvolvedores: executar pelo código-fonte
 
-## Executar pelo código-fonte
+Esta seção só é necessária para quem deseja alterar o projeto ou executar o
+script diretamente. Para o uso normal, utilize `ListarGruposPermissao.exe`.
 
-Abra o **Prompt de Comando** ou o **PowerShell** na pasta do projeto e execute:
+É necessário ter Python 3.10 ou superior instalado no Windows. Abra o
+**Prompt de Comando** ou o **PowerShell** na pasta do projeto e execute:
 
 ```bat
 python -m pip install -r requirements.txt
@@ -61,12 +64,6 @@ Também é possível informar a pasta diretamente:
 python listar_grupos_permissao.py "C:\Dados\Compartilhamento"
 ```
 
-Nesse caso, a planilha será criada como:
-
-```text
-C:\Dados\Compartilhamento\grupos_permissoes.xlsx
-```
-
 Para escolher outro arquivo de saída:
 
 ```bat
@@ -79,7 +76,7 @@ Para abrir a interface gráfica explicitamente:
 python listar_grupos_permissao.py --gui
 ```
 
-## Gerar um novo `.exe`
+## Para desenvolvedores: gerar um novo `.exe`
 
 O executável deve ser compilado no Windows, pois a aplicação depende das APIs
 de segurança do Windows. Na pasta do projeto, execute:
